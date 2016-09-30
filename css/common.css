@@ -1,0 +1,38 @@
+body {
+    padding:0px;
+    margin:0px;
+}
+
+#txt_box{
+    height:auto;
+}
+
+/*设置文本item样式*/
+#txt_box .txt_item{
+     margin:15px;
+     padding:10px;
+     border:1px solid #DFDEDE;
+     text-indent: 2em;/*首行缩进*/
+     border-radius: 10px;/*设置圆角*/
+}
+
+
+#img_box{
+    height:auto;
+    width:auto;
+}
+
+/*设置图片item样式*/
+#img_box .img_item{
+     margin:15px;
+     padding:10px;
+     border:1px solid #DFDEDE;
+     border-radius: 10px; /*设置圆角*/
+}
+
+#img_box .img_item img{
+    width:100%;     
+
+}
+
+

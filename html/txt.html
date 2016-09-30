@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <style>
+    	body{
+    		
+    	}
+    </style>
+</head>
+<body>
+    <div id="txt_box">
+        <!--文本容器-->
+	    <div class="txt_items" id="txt_items">
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+    var page = 1;
+    //初始化加载数据
+	apiready = function(){
+        page = 1;
+        loadData();
+	};
+
+    //页面滑动到底部时加载下一页数据
+	$(window).scroll(function(){
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if(scrollTop + windowHeight == scrollHeight){
+            page += 1;
+            loadData();
+        }
+    });
+
+    //请求网络数据
+    function loadData(){
+		api.ajax({
+	        url:'http://apis.baidu.com/showapi_open_bus/showapi_joke/joke_text?page='+page,
+	        method:'get',
+	        dataType:'json',
+	        charset:'utf-8',
+	        headers:{
+	           "apikey":'0858f2e8eeea214e82c2a86e06d4674d',
+	        }
+        },function(ret,err){
+        	//coding...
+        	if(ret){
+        	    var txt_items = $api.byId("txt_items");//获取控件容器
+        	    var result = eval("("+JSON.stringify(ret)+")");//将服务器返回的数据转换为JSON对象
+        	    var dataSrc = result.showapi_res_body.contentlist;//获取数据文本对象
+        	    //解析json数组添加文本到html
+        	    for(var index = 0;index < dataSrc.length;index++){
+        	      $api.append(txt_items, "<article class='txt_item'>"+dataSrc[index]["text"]+"</article>");
+        	    }
+        	    
+        	}
+        });
+    }
+    
+</script>
+</html>

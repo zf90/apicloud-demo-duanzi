@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>fixedPane</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+        html, body {
+            background-color: #dfdede;
+        }
+        li {
+            padding: 3px 10px;
+            border-bottom: 1px solid #d4d3d3;
+        }
+        .liActive {
+            background-color: #3ABA63;
+        }
+        li a {
+            display: block;
+            padding: 10px 30px;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li tapmode="liActive" onclick="showTxtFrame()"><a class="nav1">段子</a></li>
+        <li tapmode="liActive" onclick="showImgFrame()"><a class="nav2">爆笑图片</a></li>
+    </ul>
+</nav>
+    <div id="footer">code-pub.com出品</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script>
+    apiready = function () {
+        api.setStatusBarStyle({
+            style: 'dark',
+            color: '#000'
+        });
+        $api.fixStatusBar($api.dom('nav'));
+    };
+
+    //显示文本frame
+    function showTxtFrame(){
+        api.closeSlidPane();
+        api.sendEvent({
+            name: 'changePage',
+            extra: {
+                "type": 'txt',
+            }
+        });
+    }
+    
+    //显示图片frame
+    function showImgFrame(){
+        api.closeSlidPane();
+        api.sendEvent({
+            name: 'changePage',
+            extra: {
+                "type": 'img',
+            }
+        });
+    }
+    
+
+</script>
+</html>
